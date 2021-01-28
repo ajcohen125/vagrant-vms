@@ -34,6 +34,12 @@ For each VM, the `.x` in the IP is the node number: so `ubuntu-desktop-20.04-nod
 
 This means each OS can currently have up to 254 nodes.
 
+## Mount Folder
+
+For each VM, the `mount` folder will be mounted to `/mnt` in each VM, and the contents copied to the user's home directory (`/home/vagrant/`).
+
+Any extra scripts or files needed inside the VM can be placed in that folder. Mount folders are specific to OS version.
+
 ## Notes
 
 The Vagrant boxes used are mostly custom boxes that have been uploaded to the Vagrant Cloud.
