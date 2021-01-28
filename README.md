@@ -37,4 +37,7 @@ This means each OS can currently have up to 254 nodes.
 ## Notes
 
 The Vagrant boxes used are mostly custom boxes that have been uploaded to the Vagrant Cloud.
+
 Default user/pass: vagrant/vagrant
+
+The setup script for each OS will give you the option to create and add SSH keys to the virtual machines.
