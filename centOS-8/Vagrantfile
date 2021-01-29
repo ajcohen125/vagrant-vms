@@ -12,21 +12,25 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "centos-vb-1.0"
+  config.vm.box = "ajcohen125/centos8"
 
   config.vm.synced_folder "mount", "/mnt"
 
+  if Vagrant.has_plugin?("vagrant-vbguest")
+    config.vbguest.auto_update = false
+  end
+
   # define master node
-  config.vm.define "centos-master" do |master|
-    master.vm.hostname = "centos-master"
-    master.vm.network "private_network", ip: "192.168.2.2"
+  config.vm.define "centos8-master" do |master|
+    master.vm.hostname = "centos8-master"
+    master.vm.network "private_network", ip: "192.168.2.3", name: "vboxnet0", subnet: "255.255.0.0"
   end
 
   # define worker nodes IP range 192.168.10.x
   (2..255).each do |i|
-    config.vm.define "centos-node-#{i}" do |node|
+    config.vm.define "centos8-node-#{i}" do |node|
 
-        node.vm.hostname = "centos-node-#{i}"
+        node.vm.hostname = "centos8-node-#{i}"
 
         node.vm.network "private_network", ip: "192.168.10.#{i}"
     end
@@ -65,14 +69,6 @@ Vagrant.configure("2") do |config|
     sudo yum -y install kernel-uek-devel
     sudo yum -y update
 
-     cat /mnt/node.pub >> /home/vagrant/.ssh/authorized_keys
-     echo "StrictHostKeyChecking no" >> /home/vagrant/.ssh/config
-     echo "IdentityFile /home/vagrant/node" >> /home/vagrant/.ssh/config
-     sudo service ssh restart
-     cp /mnt/* /home/vagrant/
-     sudo chmod 777 node
 
-     #chmod u+x /home/vagrant/mpi-install.sh
-     #/home/vagrant/mpi-install.sh
   SHELL
 end
