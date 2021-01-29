@@ -22,13 +22,13 @@ The VMs are named with the following convention:
 
 Each OS will have a different virtual subnet:
 
-Ubuntu-Desktop-20.04: `192.168.10.x`
+Ubuntu-Desktop-20.04: `192.168.10.x` : Master node: `192.168.2.10`
 
-Ubuntu-Server-20.04:  `192.168.20.X`
+Ubuntu-Server-20.04:  `192.168.20.X` : Master node: `192.168.2.20`
 
-Ubuntu-Server-18.04:  `192.168.30.x`
+Ubuntu-Server-18.04:  `192.168.30.x` : Master node: `192.168.2.30`
 
-CentOS8:              `192.168.40.x`
+CentOS8:              `192.168.40.x` : Master node: `192.168.2.40`
 
 For each VM, the `.x` in the IP is the node number: so `ubuntu-desktop-20.04-node-2` has an IP of `192.168.10.2`
 
