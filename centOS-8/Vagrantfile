@@ -23,26 +23,26 @@ Vagrant.configure("2") do |config|
   # define master node
   config.vm.define "centos8-master" do |master|
     master.vm.hostname = "centos8-master"
-    master.vm.network "private_network", ip: "192.168.2.3", name: "vboxnet0", subnet: "255.255.0.0"
+    master.vm.network "private_network", ip: "192.168.2.40", name: "vboxnet0", netmask: "255.255.0.0"
   end
 
   # define worker nodes IP range 192.168.10.x
-  (2..255).each do |i|
+  (1..255).each do |i|
     config.vm.define "centos8-node-#{i}" do |node|
 
         node.vm.hostname = "centos8-node-#{i}"
 
-        node.vm.network "private_network", ip: "192.168.10.#{i}"
+        node.vm.network "private_network", ip: "192.168.40.#{i}", name: "vboxnet0", netmask: "255.255.0.0"
     end
   end
 
   # define worker nodes IP range 192.168.20.x
-  (257..510).each do |j|
-    config.vm.define "centos-node-#{j}" do |node2|
-        node2.vm.hostname = "centos-node-#{j}"
-        node2.vm.network "private_network", ip: "192.168.20.#{j-255}"
-    end
-  end
+  #(257..510).each do |j|
+  #  config.vm.define "centos-node-#{j}" do |node2|
+  #      node2.vm.hostname = "centos-node-#{j}"
+  #      node2.vm.network "private_network", ip: "192.168.20.#{j-255}"
+  #  end
+  #end
 
   # more worker nodes can be defined
 
@@ -66,9 +66,7 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
    config.vm.provision "shell", inline: <<-SHELL
 
-    sudo yum -y install kernel-uek-devel
     sudo yum -y update
-
 
   SHELL
 end
