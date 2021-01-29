@@ -24,6 +24,7 @@ if [[ "$VERSION" =~ "el" ]]; then
     #install vagrant
     wget -q https://releases.hashicorp.com/vagrant/2.2.14/vagrant_2.2.14_x86_64.rpm
     sudo yum localinstall -y vagrant_2.2.14_x86_64.rpm
+    rm -f vagrant_2.2.14_x86_64.rpm
 
 fi
 
